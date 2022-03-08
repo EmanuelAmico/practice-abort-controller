@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/practice-abort-controller/static/css/main.42588bc8.css",
+    "main.css": "/practice-abort-controller/static/css/main.e826870b.css",
     "main.js": "/practice-abort-controller/static/js/main.c7ef5f9f.js",
     "index.html": "/practice-abort-controller/index.html",
-    "main.42588bc8.css.map": "/practice-abort-controller/static/css/main.42588bc8.css.map",
+    "main.e826870b.css.map": "/practice-abort-controller/static/css/main.e826870b.css.map",
     "main.c7ef5f9f.js.map": "/practice-abort-controller/static/js/main.c7ef5f9f.js.map"
   },
   "entrypoints": [
-    "static/css/main.42588bc8.css",
+    "static/css/main.e826870b.css",
     "static/js/main.c7ef5f9f.js"
   ]
 }
