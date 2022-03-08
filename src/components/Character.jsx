@@ -6,14 +6,22 @@ const Character = ({ name }) => {
   const controller = useMemo(() => {
     if (name) return new AbortController();
   }, [name]);
+  const [aborted, setAborted] = useState(controller.signal.aborted);
+  const characterName = name[0].toUpperCase() + name.slice(1);
+
+  const abortLoading = () => {
+    controller.abort();
+    setAborted(true);
+  };
 
   useEffect(() => {
     setCharacterImg(null);
+    setAborted(false);
     let pending = true;
     (async () => {
       try {
         const url =
-          name === "juri"
+          characterName === "Juri"
             ? "https://i.imgur.com/iCSmvqC.png"
             : "https://i.imgur.com/iNHY5If.png";
         await wait(1000);
@@ -23,20 +31,29 @@ const Character = ({ name }) => {
         pending = false;
         setCharacterImg(src);
       } catch (error) {
-        console.log(`Loading of ${name} has been cancelled`);
-        console.warn(error);
+        console.log(`Loading of ${characterName} has been cancelled 🚫`);
       }
     })();
     return () => {
       if (pending) controller.abort();
     };
-  }, [name, controller, controller.signal]);
+  }, [characterName, controller, controller.signal]);
+
+  if (aborted)
+    return (
+      <div className="container">
+        <h1>
+          Loading of {name[0].toUpperCase() + name.slice(1)} has been cancelled
+          🚫
+        </h1>
+      </div>
+    );
 
   if (!characterImg)
     return (
       <div className="container">
         <h1>Loading {name[0].toUpperCase() + name.slice(1)}...</h1>
-        <button onClick={() => controller.abort()}>Cancel</button>
+        <button onClick={abortLoading}>Cancel</button>
       </div>
     );
 
